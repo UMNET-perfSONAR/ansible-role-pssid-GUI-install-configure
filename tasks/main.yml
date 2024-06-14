@@ -1,0 +1,65 @@
+---
+# tasks file for pssid_deploy
+
+# - name: Update the apt package index
+#   apt:
+#     update_cache: yes
+
+# - name: Add Docker’s official GPG key
+#   apt_key:
+#     url: https://download.docker.com/linux/ubuntu/gpg
+#     state: present
+
+# - name: Set up the Docker stable repository
+#   apt_repository:
+#     repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+#     state: present
+#     update_cache: yes
+
+# - name: Install Docker
+#   apt:
+#     name: docker-ce
+#     state: present
+
+# - name: Ensure Docker is started and enabled
+#   service:
+#     name: docker
+#     state: started
+#     enabled: yes
+
+# - name: Install Docker Compose
+#   apt:
+#     name: docker-compose
+#     state: present
+
+# - name: Install Ansible
+#   apt:
+#     name: ansible
+#     state: present
+
+- name: Create the install directory
+  file:
+    path: "{{ install_path }}"
+    state: directory
+    mode: "0755"
+
+# - name: Download docker-compose.yml.j2 from GitHub
+#   get_url:
+#     url: "{{ github_repo }}/blob/main/docker-compose.yml.j2"
+#     dest: "{{ install_path }}"
+#     mode: "0644"
+
+- name: Generate docker-compose.yml from template
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ install_path }}/docker-compose.yml"
+
+- name: Pull Docker images
+  command: docker-compose pull
+  args:
+    chdir: "{{ install_path }}"
+
+- name: Run Docker containers
+  command: docker-compose up -d
+  args:
+    chdir: "{{ install_path }}"

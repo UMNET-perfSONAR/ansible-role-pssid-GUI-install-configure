@@ -1,0 +1,6 @@
+# DO NOT MODIFY?
+pssid_gui_root_dir: "/var/lib/pssid"
+pssid_gui_exec_dir: "/usr/lib/exec/pssid"
+
+# TODO FOR DEVELOPERS: change dockerhub_username as appropriate
+dockerhub_username: "wmarcoyu"
