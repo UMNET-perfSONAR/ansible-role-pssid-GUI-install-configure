@@ -1,0 +1,20 @@
+- name: Create the install directory
+  file:
+    path: "{{ pssid_gui_install_configure_install_path }}"
+    state: directory
+    mode: "0755"
+
+- name: Generate docker-compose.yml from template
+  template:
+    src: "docker-compose.yml.j2"
+    dest: "{{ pssid_gui_install_configure_install_path }}/docker-compose.yml"
+
+- name: Pull Docker images
+  command: docker-compose pull
+  args:
+    chdir: "{{ pssid_gui_install_configure_install_path }}"
+
+- name: Run Docker containers
+  command: docker-compose up -d
+  args:
+    chdir: "{{ pssid_gui_install_configure_install_path }}"
