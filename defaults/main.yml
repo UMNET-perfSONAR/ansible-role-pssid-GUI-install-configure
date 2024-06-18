@@ -1,8 +1,4 @@
----
 # defaults file for pssid_deploy
 
-# TODO FOR DEVELOPERS: change GitHub repo as appropriate
-# github_repo: "https://github.com/wmarcoyu/pssid-gui2-pull-deploy"
-
-# TODO FOR USERS: set the installation path on target hosts
-install_path: "/usr/local/pssid-install-configure"
+# Default installation path - only contains a docker-compose file.
+pssid_gui_install_configure_install_path: "/usr/lib/pssid"

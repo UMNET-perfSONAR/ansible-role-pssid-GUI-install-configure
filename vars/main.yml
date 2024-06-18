@@ -1,4 +1,3 @@
-# DO NOT MODIFY?
 pssid_gui_root_dir: "/var/lib/pssid"
 pssid_gui_exec_dir: "/usr/lib/exec/pssid"
 
